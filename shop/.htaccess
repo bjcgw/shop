@@ -1,0 +1,19 @@
+
+#开启重写开关
+RewriteEngine on
+
+# 使用规则，请求的(.*)不存在就走“index.php”,否则走存在的内容
+# 访问的不是一个文件file
+RewriteCond %{REQUEST_FILENAME} !-f
+# 访问的不是一个目录directory
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# 访问的(.*)不是文件 也不是目录，就走Index.php入口文件
+
+#(.*)代表请求的时候后续给传递的内容,就是当前shop目录后续信息，即“Home/User/login”
+# $1代表前边小阔内容，这是正则表达式中模式单元重复使用的用法
+# ()括号是一个模式单元，模式单元可以重复使用
+# http://web.lianxi43.com/shop/Home/User/login
+# 走
+# http://web.lianxi43.com/shop/index.php/Home/User/login
+RewriteRule ^(.*)$  index\.php/$1
